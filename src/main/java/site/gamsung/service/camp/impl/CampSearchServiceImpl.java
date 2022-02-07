@@ -40,9 +40,11 @@ public class CampSearchServiceImpl implements CampSearchService{
 	@Override
 	public Map<String, Object> listCamp(Search search){
 		
+		System.out.println("캠프 서치 조건 :: "+search);
+		
 		List<Camp> list = campSearchDAO.listCamp(search);
 		int totalCount = campSearchDAO.getTotalCount(search);
-		
+						
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));

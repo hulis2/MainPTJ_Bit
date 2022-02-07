@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <section class="bg-dark-30 showcase-page-header module parallax-bg" data-background="../../resources/images/KakaoTalk_Moim_buAhAGzAhL3VZBLn5H9XCNfXpebbgi.jpg" style="background-attachment: inherit;">
   <div id="modalForm" class="modal-block modal-block-primary mfp mfp-hide" style="font-size: 12px;">
@@ -14,57 +13,28 @@ pageEncoding="UTF-8"%>
             <label class="col-sm-2 control-label">지역별</label>
             <div class="col-sm-10">
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr1" name="campAddr" value="서울">서울
+                  <input type="checkbox" id="addr1" name="detailCampAddr" value="서울">서울
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr2" name="campAddr" value="부산">부산
+                  <input type="checkbox" id="addr2" name="detailCampAddr" value="부산">부산
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr3" name="campAddr" value="대구">대구
+                  <input type="checkbox" id="addr3" name="detailCampAddr" value="대구">대구
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr4" name="campAddr" value="인천">인천
+                  <input type="checkbox" id="addr4" name="detailCampAddr" value="인천">인천
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr5" name="campAddr" value="광주">광주
+                  <input type="checkbox" id="addr5" name="detailCampAddr" value="광주">광주
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr6" name="campAddr" value="대전">대전
+                  <input type="checkbox" id="addr6" name="detailCampAddr" value="대전">대전
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr7" name="campAddr" value="울산">울산
+                  <input type="checkbox" id="addr7" name="detailCampAddr" value="울산">울산
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr8" name="campAddr" value="세종">세종
-                </label>
-              </div>
-            </div>
-            <div class="form-group mt-lg">
-              <label class="col-sm-2 control-label"></label>
-              <div class="col-sm-10">
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr9" name="campAddr" value="경기">경기
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr10" name="campAddr" value="강원">강원
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr11" name="campAddr" value="충북">충북
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr12" name="campAddr" value="충남">충남
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr13" name="campAddr" value="전북">전북
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr14" name="campAddr" value="전남">전남
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr15" name="campAddr" value="경북">경북
-                </label>
-                <label class="checkbox-inline">
-                  <input type="checkbox" id="addr16" name="campAddr" value="경남">경남
+                  <input type="checkbox" id="addr8" name="detailCampAddr" value="세종">세종
                 </label>
               </div>
             </div>
@@ -72,7 +42,36 @@ pageEncoding="UTF-8"%>
               <label class="col-sm-2 control-label"></label>
               <div class="col-sm-10">
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="addr17" name="campAddr" value="제주">제주
+                  <input type="checkbox" id="addr9" name="detailCampAddr" value="경기">경기
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr10" name="detailCampAddr" value="강원">강원
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr11" name="detailCampAddr" value="충북">충북
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr12" name="detailCampAddr" value="충남">충남
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr13" name="detailCampAddr" value="전북">전북
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr14" name="detailCampAddr" value="전남">전남
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr15" name="detailCampAddr" value="경북">경북
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr16" name="detailCampAddr" value="경남">경남
+                </label>
+              </div>
+            </div>
+            <div class="form-group mt-lg">
+              <label class="col-sm-2 control-label"></label>
+              <div class="col-sm-10">
+                <label class="checkbox-inline">
+                  <input type="checkbox" id="addr17" name="detailCampAddr" value="제주">제주
                 </label>
             </div>
           </div>
@@ -272,66 +271,3 @@ pageEncoding="UTF-8"%>
     </div>
   </div>
 </section>
-
-
-<!-- <div class="titan-caption">
-  <div class="row">
-    <div class="col-xs-4 col-lg-offset-4" style="text-align: center;">
-      <h2  style="margin-bottom: 20px;">캠핑장을 검색 하세요!</h2>
-      <div class="row">
-        <div class="row">
-          <div style="text-align: end; padding-right: 15px;">
-            <a class="modal-with-form btn btn-success" href="#modalForm" style="padding: 5px;">상세검색+</a>
-            
-          </div>
-        </div>
-
-      <form id="search">  
-        <div class="row" style="margin-bottom: 15px;">
-          <div class="form-group">
-            <label class="col-sm-3 control-label">키워드</label>
-            <div class="col-sm-9">
-              <input type="text" id="searchKeyword" name="searchKeyword" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <label class="col-md-3 control-label">지역별</label>
-            <div class="col-md-3">
-              <select class="form-control" id="sido" name="campAddr">
-                <option value="">전체/도</option>
-                <option value="서울">서울시</option>
-                <option value="부산">부산시</option>
-                <option value="대구">대구시</option>
-                <option value="인천">인천시</option>
-                <option value="광주">광주시</option>
-                <option value="대전">대전시</option>
-                <option value="울산">울산시</option>
-                <option value="세종">세종시</option>
-                <option value="경기">경기도</option>
-                <option value="강원">강원도</option>
-                <option value="충북">충청북도</option>
-                <option value="충남">충청남도</option>
-                <option value="전북">전라북도</option>
-                <option value="전남">전라남도</option>
-                <option value="경북">경상북도</option>
-                <option value="경남">경상남도</option>
-                <option value="제주">제주도</option>
-              </select>
-            </div>
-            <div class="col-md-3" style="text-align: start; padding-left: 0px;" >
-              <select class="form-control" id="sigungu" name="campAddr">
-                  <option value="">전체/시/군</option>
-              </select>
-            </div>
-            <div class="col-md-3" style="text-align: end;">
-              <button class="btn btn-success btn-round" type="button" id="searchbtn">검색</button>
-            </div>
-          </div>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-</div> -->

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -13,6 +12,7 @@ pageEncoding="UTF-8"%>
     <title>ListCamp</title>
     
     <jsp:include page="../../resources/commonLib.jsp"/>
+
     <style type="text/css">
       .camp_name_sub {
         overflow: hidden;
@@ -24,16 +24,10 @@ pageEncoding="UTF-8"%>
   </head>
   <body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
     <main>
-    <!-- 
-      <div class="page-loader">
-        <div class="loader">Loading...</div>
-      </div>
-    -->
-       
+          
       <!-- header -->      
       <jsp:include page="/view/common/header.jsp"/>
       <!-- header End -->
-
 
       <!-- Search -->
       <jsp:include page="/view/camp/campSearch.jsp"/>
@@ -41,8 +35,6 @@ pageEncoding="UTF-8"%>
 
       <div class="container"  style="padding-top: 30px; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto" >   
           
-        <!-- <div class="col-xs-1"></div> -->
-        <!-- <div class="col-xs-9"> -->
         <div>
         <!-- 상단 -->
         <div class="row">
@@ -68,30 +60,34 @@ pageEncoding="UTF-8"%>
           <input type="hidden" name="sortCondition" value="조회수 높은순">
           <input type="hidden" name="searchKeyword" value="${search.searchKeyword}">
           <c:set var="i" value="0" />
-           <c:forEach var="campAddr" items="${search.campAddr}">
+            <c:forEach var="campAddr" items="${search.campAddr}">
               <c:set var="i" value="${ i+1 }" />
               <input type="hidden" name="campAddr" value="${campAddr}">
-          </c:forEach>
-          <c:forEach var="circumstance" items="${search.circumstance}">
+            </c:forEach>
+            <c:forEach var="detailCampAddr" items="${search.detailCampAddr}">
               <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="circumstance" value="${circumstance}">
-          </c:forEach>
-          <c:forEach var="mainSite" items="${search.mainSite}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="mainSite" value="${mainSite}">
-          </c:forEach>
-          <c:forEach var="subSite" items="${search.subSite}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="subSite" value="${subSite}">
-          </c:forEach>
-          <c:forEach var="theme" items="${search.theme}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="theme" value="${theme}">
-          </c:forEach>
-          <c:forEach var="price" items="${search.price}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="price" value="${price}">
-          </c:forEach>
+              <input type="hidden" name="detailCampAddr" value="${detailCampAddr}">
+            </c:forEach>
+            <c:forEach var="circumstance" items="${search.circumstance}">
+                <c:set var="i" value="${ i+1 }" />
+                <input type="hidden" name="circumstance" value="${circumstance}">
+            </c:forEach>
+            <c:forEach var="mainSite" items="${search.mainSite}">
+                <c:set var="i" value="${ i+1 }" />
+                <input type="hidden" name="mainSite" value="${mainSite}">
+            </c:forEach>
+            <c:forEach var="subSite" items="${search.subSite}">
+                <c:set var="i" value="${ i+1 }" />
+                <input type="hidden" name="subSite" value="${subSite}">
+            </c:forEach>
+            <c:forEach var="theme" items="${search.theme}">
+                <c:set var="i" value="${ i+1 }" />
+                <input type="hidden" name="theme" value="${theme}">
+            </c:forEach>
+            <c:forEach var="price" items="${search.price}">
+                <c:set var="i" value="${ i+1 }" />
+                <input type="hidden" name="price" value="${price}">
+            </c:forEach>
         </form>
 
         <form id="rating_order">  
@@ -101,6 +97,10 @@ pageEncoding="UTF-8"%>
            <c:forEach var="campAddr" items="${search.campAddr}">
               <c:set var="i" value="${ i+1 }" />
               <input type="hidden" name="campAddr" value="${campAddr}">
+          </c:forEach>
+          <c:forEach var="detailCampAddr" items="${search.detailCampAddr}">
+            <c:set var="i" value="${ i+1 }" />
+            <input type="hidden" name="detailCampAddr" value="${detailCampAddr}">
           </c:forEach>
           <c:forEach var="circumstance" items="${search.circumstance}">
               <c:set var="i" value="${ i+1 }" />
@@ -132,6 +132,10 @@ pageEncoding="UTF-8"%>
               <c:set var="i" value="${ i+1 }" />
               <input type="hidden" name="campAddr" value="${campAddr}">
           </c:forEach>
+          <c:forEach var="detailCampAddr" items="${search.detailCampAddr}">
+            <c:set var="i" value="${ i+1 }" />
+            <input type="hidden" name="detailCampAddr" value="${detailCampAddr}">
+          </c:forEach>
           <c:forEach var="circumstance" items="${search.circumstance}">
               <c:set var="i" value="${ i+1 }" />
               <input type="hidden" name="circumstance" value="${circumstance}">
@@ -161,6 +165,10 @@ pageEncoding="UTF-8"%>
            <c:forEach var="campAddr" items="${search.campAddr}">
               <c:set var="i" value="${ i+1 }" />
               <input type="hidden" name="campAddr" value="${campAddr}">
+          </c:forEach>
+          <c:forEach var="detailCampAddr" items="${search.detailCampAddr}">
+            <c:set var="i" value="${ i+1 }" />
+            <input type="hidden" name="detailCampAddr" value="${detailCampAddr}">
           </c:forEach>
           <c:forEach var="circumstance" items="${search.circumstance}">
               <c:set var="i" value="${ i+1 }" />

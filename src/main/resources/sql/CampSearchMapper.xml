@@ -79,8 +79,14 @@
 	 			AND u.camp_name LIKE CONCAT('%',#{searchKeyword},'%')
 			</if>
 			<if test="campAddr !=null and campAddr.size !=0">
-				<foreach collection="campAddr" item="item" index="index" >
+				<foreach collection="campAddr" item="item" index="index">
 					AND u.addr LIKE CONCAT('%',#{item},'%') 
+				</foreach>
+	 		</if>
+	 		<if test="detailCampAddr !=null and detailCampAddr.size !=0">
+				AND 
+				<foreach collection="detailCampAddr" item="item" index="index" open="(" close=")" separator="OR">
+					u.addr LIKE CONCAT('%',#{item},'%') 
 				</foreach>
 	 		</if>
 			<if test="mainSite !=null and mainSite.size !=0">
@@ -150,10 +156,16 @@
 	 					AND u.camp_name LIKE CONCAT('%',#{searchKeyword},'%')
 					</if>
 					<if test="campAddr !=null and campAddr.size !=0">
-					<foreach collection="campAddr" item="item" index="index" >
-						AND u.addr LIKE CONCAT('%',#{item},'%') 
-					</foreach>
+						<foreach collection="campAddr" item="item" index="index" >
+							AND u.addr LIKE CONCAT('%',#{item},'%') 
+						</foreach>
 	 				</if>
+	 				<if test="detailCampAddr !=null and detailCampAddr.size !=0">
+						AND 
+						<foreach collection="detailCampAddr" item="item" index="index" open="(" close=")" separator="OR">
+							u.addr LIKE CONCAT('%',#{item},'%') 
+						</foreach>
+			 		</if>
 					<if test="mainSite !=null and mainSite.size !=0">
 			 			AND m.mainsite_type IN
 						<foreach collection="mainSite" item="item" index="index" open="(" close=")" separator=",">

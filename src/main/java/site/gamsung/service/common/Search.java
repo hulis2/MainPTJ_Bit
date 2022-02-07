@@ -19,6 +19,7 @@ public class Search {
 	private String id;
 	private int reportTotalCount;
 	private List<String> campAddr;
+	private List<String> detailCampAddr;
 	private List<String> circumstance;
 	private List<String> mainSite;
 	private List<String> subSite;
@@ -42,6 +43,14 @@ public class Search {
 
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
+	}
+
+	public List<String> getDetailCampAddr() {
+		return detailCampAddr;
+	}
+
+	public void setDetailCampAddr(List<String> detailCampAddr) {
+		this.detailCampAddr = detailCampAddr;
 	}
 
 	public String getSortCondition() {
@@ -229,6 +238,7 @@ public class Search {
 			+ "\n [role] : " + role
 			+ "\n [id] : " + id 
 			+ "\n [campAddr] : " + campAddr 
+			+ "\n [detailCampAddr] : " + detailCampAddr
 			+ "\n [circumstance] : " + circumstance 
 			+ "\n [mainSite] : " + mainSite 
 			+ "\n [subSite] : " + subSite 
