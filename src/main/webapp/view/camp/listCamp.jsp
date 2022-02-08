@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<!-- 캠핑장 목록 페이지
+캠핑장 검색 결과에 맞는 캠핑장 목록 출력
+캠핑장 이미지 클릭 시 상세정보 페이지 전환
+한 페이지에 5개의 캠핑장 출력, 페이지 네이게이션 및 조회수, 평점, 등록일 별 소팅 기능
+작성자 : 박철홍 -->
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
   <head>
@@ -45,19 +50,19 @@
                 
                 <div class="fa-hover col-xs-3 ">  
                   조회수
-                  <i class="fa fa-arrow-down" id="view" name="sortCondition" style="cursor: pointer;"></i>
+                  <i class="fa fa-arrow-down order" name="sortCondition" style="cursor: pointer;" data="조회수 높은순"></i>
                                    
                   평점
-                  <i class="fa fa-arrow-down" id="rating" name="sortCondition" style="cursor: pointer;"></i>
+                  <i class="fa fa-arrow-down order" name="sortCondition" style="cursor: pointer;" data="평점 높은순"></i>
                   
                   등록일
-                  <i class="fa fa-arrow-down" id="regdate" name="sortCondition" style="cursor: pointer;"></i>
+                  <i class="fa fa-arrow-down order" name="sortCondition" style="cursor: pointer;" data="최근 등록일순"></i>
                 </div>
           
         </div>
 
-        <form id="view_order">
-          <input type="hidden" name="sortCondition" value="조회수 높은순">
+        <form id="order">
+          <input type="hidden" id="sortCondition" name="sortCondition" value="">
           <input type="hidden" name="searchKeyword" value="${search.searchKeyword}">
           <c:set var="i" value="0" />
             <c:forEach var="campAddr" items="${search.campAddr}">
@@ -88,74 +93,6 @@
                 <c:set var="i" value="${ i+1 }" />
                 <input type="hidden" name="price" value="${price}">
             </c:forEach>
-        </form>
-
-        <form id="rating_order">  
-          <input type="hidden" name="sortCondition" value="평점 높은순">
-          <input type="hidden" name="searchKeyword" value="${search.searchKeyword}">
-          <c:set var="i" value="0" />
-           <c:forEach var="campAddr" items="${search.campAddr}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="campAddr" value="${campAddr}">
-          </c:forEach>
-          <c:forEach var="detailCampAddr" items="${search.detailCampAddr}">
-            <c:set var="i" value="${ i+1 }" />
-            <input type="hidden" name="detailCampAddr" value="${detailCampAddr}">
-          </c:forEach>
-          <c:forEach var="circumstance" items="${search.circumstance}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="circumstance" value="${circumstance}">
-          </c:forEach>
-          <c:forEach var="mainSite" items="${search.mainSite}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="mainSite" value="${mainSite}">
-          </c:forEach>
-          <c:forEach var="subSite" items="${search.subSite}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="subSite" value="${subSite}">
-          </c:forEach>
-          <c:forEach var="theme" items="${search.theme}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="theme" value="${theme}">
-          </c:forEach>
-          <c:forEach var="price" items="${search.price}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="price" value="${price}">
-          </c:forEach>
-        </form>
-
-        <form id="regdate_order">  
-          <input type="hidden" name="sortCondition" value="최근 등록일순">
-          <input type="hidden" name="searchKeyword" value="${search.searchKeyword}">
-          <c:set var="i" value="0" />
-           <c:forEach var="campAddr" items="${search.campAddr}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="campAddr" value="${campAddr}">
-          </c:forEach>
-          <c:forEach var="detailCampAddr" items="${search.detailCampAddr}">
-            <c:set var="i" value="${ i+1 }" />
-            <input type="hidden" name="detailCampAddr" value="${detailCampAddr}">
-          </c:forEach>
-          <c:forEach var="circumstance" items="${search.circumstance}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="circumstance" value="${circumstance}">
-          </c:forEach>
-          <c:forEach var="mainSite" items="${search.mainSite}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="mainSite" value="${mainSite}">
-          </c:forEach>
-          <c:forEach var="subSite" items="${search.subSite}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="subSite" value="${subSite}">
-          </c:forEach>
-          <c:forEach var="theme" items="${search.theme}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="theme" value="${theme}">
-          </c:forEach>
-          <c:forEach var="price" items="${search.price}">
-              <c:set var="i" value="${ i+1 }" />
-              <input type="hidden" name="price" value="${price}">
-          </c:forEach>
         </form>
 
         <form id="pagenavi">
@@ -290,18 +227,15 @@
             
             });
     
-            $("#view").on("click" , function() {
-                  $("#view_order").attr("method","POST").attr("action","/campGeneral/listCamp").submit();
+            $(".order").on("click" , function() {
+
+                  let sortCondition = $(this).attr("data");
+                  console.log("소트컨디션 :: "+sortCondition);
+                  $("#sortCondition").val(sortCondition);
+
+                  $("#order").attr("method","POST").attr("action","/campGeneral/listCamp").submit();
               });
-    
-            $("#rating").on("click" , function() {
-                $("#rating_order").attr("method","POST").attr("action","/campGeneral/listCamp").submit();
-            });
-            
-            $("#regdate").on("click" , function() {
-                $("#regdate_order").attr("method","POST").attr("action","/campGeneral/listCamp").submit();
-            });
-    
+         
             $(  ".image"  ).on("click", function() {    
                 var campNo = $(this).data("campno");
                 console.log(campNo);

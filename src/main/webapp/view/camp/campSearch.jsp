@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- 캠핑장 검색 페이지
+일반검색 - 지역별 검색, 키워드 검색
+상세검색(모달) - 지역, 주요시설, 부가시설, 주변환경, 테마, 가격별 선택에 맞는 검색
+작성자 : 박철홍 -->
 <section class="bg-dark-30 showcase-page-header module parallax-bg" data-background="../../resources/images/KakaoTalk_Moim_buAhAGzAhL3VZBLn5H9XCNfXpebbgi.jpg" style="background-attachment: inherit;">
   <div id="modalForm" class="modal-block modal-block-primary mfp mfp-hide" style="font-size: 12px;">
             
