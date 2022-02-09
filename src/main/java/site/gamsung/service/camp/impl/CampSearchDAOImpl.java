@@ -1,5 +1,10 @@
 package site.gamsung.service.camp.impl;
 
+/*
+CampSearchService에서 호출 되는 캠핑장 검색 관련 DAO
+DB에 연결 조건에 맞는 정보를 select, insert, update 함
+작성자 : 박철홍
+*/
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -50,13 +55,13 @@ public class CampSearchDAOImpl implements CampSearchDAO {
 	}
 
 	@Override
-	public MainSite getMainsiteByReservation(CampReservation campReservation) {
-		return sqlSession.selectOne("CampSearchMapper.getMainsiteByReservation",campReservation);
+	public List<SubSite> getSubSite(int campNo){
+		return sqlSession.selectList("CampSearchMapper.getSubSite", campNo);
 	}
 
 	@Override
-	public List<SubSite> getSubSite(int campNo){
-		return sqlSession.selectList("CampSearchMapper.getSubSite", campNo);
+	public MainSite getMainsiteByReservation(CampReservation campReservation) {
+		return sqlSession.selectOne("CampSearchMapper.getMainsiteByReservation",campReservation);
 	}
 
 	@Override

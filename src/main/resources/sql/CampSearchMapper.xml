@@ -228,18 +228,18 @@
 		ORDER BY mainsite_type
 	</select>
 	
+	<select id="getSubSite"  parameterType="int"  resultMap="SubSiteSelectMap">
+		SELECT subsite_no, camp_no, subsite_type, subsite_reg_date, subsite_name, subsite_info, subsite_img
+		FROM SUBSITE
+		WHERE camp_no = #{value}
+	</select>
+	
 	<select id="getMainsiteByReservation"  parameterType="campReservation"  resultMap="MainSiteSelectMap">
 		SELECT mainsite_no, camp_no, mainsite_type, mainsite_name, mainsite_section, mainsite_size, mainsite_min_capacity, 
 			   mainsite_max_capacity, mainsite_min_price, mainsite_add_price, mainsite_parking_size, mainsite_info, 
 			   mainsite_reg_date, mainsite_img1, mainsite_img2, mainsite_img3
 		FROM MAINSITE
 		WHERE camp_no = #{camp.campNo} AND mainsite_no = #{mainSite.mainSiteNo} AND delete_flag = 'N'
-	</select>
-	
-	<select id="getSubSite"  parameterType="int"  resultMap="SubSiteSelectMap">
-		SELECT subsite_no, camp_no, subsite_type, subsite_reg_date, subsite_name, subsite_info, subsite_img
-		FROM SUBSITE
-		WHERE camp_no = #{value}
 	</select>
 			
 	<update id="updateViewCount" parameterType="int">

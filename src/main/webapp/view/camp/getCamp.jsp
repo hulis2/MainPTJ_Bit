@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<!-- 캠핑장 상세보기 페이지
+선택한 캠핑장에 대한 상세 정보를 보여줌
+대표 정보 이외에 캠핑장 소개, 이용안내, 위치/주변정보(Map), 공지사항, Q&A, 평점&리뷰 정보를 Tab을 클릭하면 보여줌
+작성자 : 박철홍 -->
       <!DOCTYPE html>
       <html lang="en-US" dir="ltr">
 
@@ -808,19 +812,9 @@
                         function noticeIframeHeight(i) { document.getElementById("noticeschange").style.height = parseInt(i) + "px"; }
                       </script>
                     </div>
-
 					
                     <div class="tab-pane teb-iframe" id="qna">
-                    
-                    <form name="forcampQna">
-						<input type="hidden" name="iframeCampName" id="iframeCampName" value="${camp.user.campName}">
-					</form>
-					<script>
-					    document.forcampQna.target = "qnaschange";
-					    document.forcampQna.submit();
-					</script>
-                    
-                      <iframe src="/campBusiness/listCampQna?campNo=${camp.campNo}" scrolling="no" id="qnaschange"></iframe>
+                        <iframe src="/campBusiness/listCampQna?campNo=${camp.campNo}" scrolling="no" id="qnaschange"></iframe>
 	                      <script type="text/javascript">
 	                        function qnaIframeHeight(i) { document.getElementById("qnaschange").style.height = parseInt(i) + "px"; }
 	                      </script> 
@@ -843,6 +837,15 @@
               <input type="hidden" id="campno" name="camp.campNo" value="${camp.campNo}" />
               <input type="hidden" id="id" name="user.id" value="${user.id}" />
             </form>
+
+            <form name="forcampQna">
+              <input type="hidden" name="iframeCampName" id="iframeCampName" value="${camp.user.campName}">
+            </form>
+            
+            <script>
+                document.forcampQna.target = "qnaschange";
+                document.forcampQna.submit();
+            </script>
 
         </main>
        
@@ -872,14 +875,20 @@
               });
 
             $("#reservation").on("click", function () {
-              var mainSiteNo = 0;
+              
+              let mainSiteNo = 0;
+              
               $("#hidden").attr("method", "POST").attr("action", "/campGeneral/addReservation?mainSiteNo=" + mainSiteNo).submit();
             });
 
             $(".li-btn").on("shown.bs.tab", function (e) {
+              
               e.preventDefault();
+              
               $(this).tab('show');
-              var iframeHeight = $(".tab-pane.active iframe").contents().find("html").height();
+              
+              let iframeHeight = $(".tab-pane.active iframe").contents().find("html").height();
+              
               $(".teb-iframe.active iframe").height(iframeHeight);
             });
             

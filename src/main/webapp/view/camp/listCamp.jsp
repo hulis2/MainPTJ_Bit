@@ -141,7 +141,7 @@
                     
                     <!-- 캠핑장 이미지 -->
                     <div class="col-lg-3 ">
-                        <div class="image" name="campNo" data-campNo="${camp.campNo}"  style="cursor: pointer; width: 200px; height: 150px; border-radius: 10px; display: flex; justify-content: center; align-items: center">
+                        <div class="image" name="campNo" data-campNo="${camp.campNo}"  style="cursor: pointer; width: 270px; height: 200px; border-radius: 10px; display: flex; justify-content: center; align-items: center">
                           <img src="/uploadfiles/campimg/campbusiness/camp/${camp.campImg1}" onerror="this.src='/uploadfiles/campimg/campbusiness/camp/no_image.jpg'"  alt="캠핑장 대표이미지" >
                         </div>                   
                      </div>            
@@ -238,8 +238,8 @@
          
             $(  ".image"  ).on("click", function() {    
                 var campNo = $(this).data("campno");
-                console.log(campNo);
-                $("#get_camp").attr("method","POST").attr("action","/campGeneral/getCamp?campNo="+campNo).submit()
+                
+                self.location ="/campGeneral/getCamp?campNo="+campNo;
             });   
     
           });
