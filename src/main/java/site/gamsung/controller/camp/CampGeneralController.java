@@ -35,6 +35,11 @@ import site.gamsung.service.domain.RatingReview;
 import site.gamsung.service.domain.User;
 import site.gamsung.service.servicecenter.NoticeService;
 
+/*
+캠핑장 관련 일반회원(비회원)이 접근 할수 있는 Service를 처리하는 Ctrl
+검색, 예약, 리뷰, 공지사항 확인
+작성자 : 박철홍
+*/
 @Controller
 @RequestMapping("/campGeneral/*")
 public class CampGeneralController {
@@ -68,20 +73,25 @@ public class CampGeneralController {
 	@Value("#{commonProperties['campPageSize']}")
 	int campPageSize;
 	
+	//검색 조건을 Search domain에 담아 캠핑장 검색 및 결과 페이지 구성을 위한 정보를 모델에 담고 listCamp.jsp로 forward
 	@RequestMapping(value = "listCamp", method = RequestMethod.POST)
 	public String listCamp(@ModelAttribute("search") Search search, Model model){
 		System.out.println("/campGeneral/listCamp : POST");
-	
+		
+		//최조 검색시 현재 페이지값이 없을경우 1로 셋팅
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
 		
 		search.setPageSize(pageSize);
 		
+		//Service 로직 수행 결과로 서치된 캠핑장 정보와 총 서치된 캠핑장 갯수를 map에 담음
 		Map<String, Object> map = campSearchService.listCamp(search);
 		
+		//현재 페이지, 서치된 캠핑장 갯수, 페이지 숫자, 페이지당 노출 캠핑장 갯수 정보로 결과 페이지를 구성하는 Page 생성
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
+		//서치된 캠핑장 정보, 결과 Page, search 조건(네비게이션 및 소팅시에 검색 조건 정보가 있어야함)을 모델에 담음
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -89,12 +99,15 @@ public class CampGeneralController {
 		return "forward:/view/camp/listCamp.jsp";
 	}
 	
-	@RequestMapping(value = "getCamp")
-	public String getCamp(@RequestParam("campNo") int campNo ,@ModelAttribute("search") Search search,  Model model ){
-		System.out.println("/campGeneral/getCamp");
+	//캠핑장 등록 번호를 GET 방식으로 받아 캠핑장 정보(기본정보, 주요시설정보, 부가시설정보)를 검색 후 모델에 담고 getCamp.jsp로 forward
+	@RequestMapping(value = "getCamp", method = RequestMethod.GET)
+	public String getCamp(@RequestParam("campNo") int campNo,  Model model ){
+		System.out.println("/campGeneral/getCamp : GET");
 		
+		//Service 로직 수행 결과를 map에 담음
 		Map<String, Object> map = campSearchService.getCamp(campNo);
 		
+		//map에 담긴 캠핑장 기본정보, 주요시설정보, 부가시설정보를 모델에 담음
 		model.addAttribute("camp", map.get("camp"));
 		model.addAttribute("mainSite", map.get("mainSite"));
 		model.addAttribute("subSite", map.get("subSite"));
@@ -328,7 +341,9 @@ public class CampGeneralController {
 		}
 
 	}
-		
+	
+	//캠핑장 등록번호와 검색 조건(정렬, 페이지 네비게이션)을 GET 또는 POST 방식으로 받아 검색 후 모델에 담고 listRatingReview.jsp로 forward
+	//캠핑장 상세보기 시에 getCamp와 같이 실행(iframe에서 GET 방식으로)
 	@RequestMapping(value = "listCampRatingReview")
 	public String listCampRatingReview(@RequestParam("campNo") int campNo , @ModelAttribute("search") Search search , Model model){
 	
