@@ -16,7 +16,6 @@ import site.gamsung.service.domain.CampReservation;
 import site.gamsung.service.domain.MainSite;
 import site.gamsung.service.domain.Payment;
 import site.gamsung.service.domain.ReservationStatistics;
-import site.gamsung.service.payment.PaymentDAO;
 import site.gamsung.util.user.SendMessage;
 
 @Service("campReservationServiceImpl")
@@ -25,17 +24,9 @@ public class CampReservationServiceImpl implements CampReservationService {
 	@Autowired
 	@Qualifier("campReservationDAOImpl")
 	private CampReservationDAO campReservationDAO;
-	
-	@Autowired
-	@Qualifier("paymentDAOImpl")
-	private PaymentDAO paymentDAO;
-		
+
 	public void setCampReservationDAO(CampReservationDAO campReservationDAO) {
 		this.campReservationDAO = campReservationDAO;
-	}
-
-	public void setPaymentDAO(PaymentDAO paymentDAO) {
-		this.paymentDAO = paymentDAO;
 	}
 
 	public CampReservationServiceImpl() {
