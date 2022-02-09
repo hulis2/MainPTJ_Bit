@@ -99,7 +99,7 @@ public class CampGeneralController {
 		return "forward:/view/camp/listCamp.jsp";
 	}
 	
-	//캠핑장 등록 번호를 GET 방식으로 받아 캠핑장 정보(기본정보, 주요시설정보, 부가시설정보)를 검색 후 모델에 담고 getCamp.jsp로 forward
+	//캠핑장 등록 번호를 GET 방식으로 받아 캠핑장 정보(기본정보, 주요시설정보, 부가시설정보)를 검색 후 모델에 담고 getCamp.jsp로 forward 
 	@RequestMapping(value = "getCamp", method = RequestMethod.GET)
 	public String getCamp(@RequestParam("campNo") int campNo,  Model model ){
 		System.out.println("/campGeneral/getCamp : GET");
