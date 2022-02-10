@@ -116,13 +116,17 @@ public class CampGeneralController {
 		return "forward:/view/camp/getCamp.jsp";
 	}
 	
+	//예약 진행을 위한 정보를 Post방식으로 받아 단계별로 예약 진행
 	@RequestMapping(value = "addReservation", method = RequestMethod.POST)
 	public String addReservation(@RequestParam("mainSiteNo") int mainSiteNo, Model model, 
-									@ModelAttribute("campReservation") CampReservation campReservation,  HttpSession httpSession){
+									@ModelAttribute("campReservation") CampReservation campReservation, HttpSession httpSession){
 		
 		System.out.println("/campGeneral/addReservation : POST");
 		
+		//로그인시 세션에 등록된 user 정보를 가져옴 
 		User user = (User)httpSession.getAttribute("user");
+		
+		//선택한 주요시설 등록번호를 예약정보에 등록
 		MainSite mainSite = new MainSite();
 		mainSite.setMainSiteNo(mainSiteNo);
 		campReservation.setMainSite(mainSite);
@@ -130,16 +134,15 @@ public class CampGeneralController {
 		if(user == null) {
 			
 			return "redirect:/";
-			
+		
+		//주요시설이 선택되지 않았을 경우(0일경우) 예약 진행 시작 전이므로 기본적인 예약정보를 가지고 addReservationFirst.jsp로 forward
 		}else if(mainSiteNo == 0) {
 			
-			Map<String, Object> map = campSearchService.getCamp(campReservation.getCamp().getCampNo());
 			model.addAttribute("campReservation",campReservation);
-			model.addAttribute("mainSite", map.get("mainSite"));
-			model.addAttribute("camp", map.get("camp"));
 			
 			return "forward:/view/camp/addReservationFirst.jsp";
 
+		//주요시설 등록번호가 0이 아니고 이용인원이 선택되지 않았을경우(0일경우) 선택된 주요시설 정보와 예약정보를 가지고 addReservationSecond.jsp로 forward
 		}else if(campReservation.getUseNum() == 0){
 			
 			MainSite resultMainSite = campSearchService.getMainSite(campReservation);
@@ -150,6 +153,7 @@ public class CampGeneralController {
 			
 			return "forward:/view/camp/addReservationSecond.jsp";
 		
+		//주요시설 등록번호가 0이아니고 이용인원이 0이 아닐경우 선택된 주요시설 정보와 예약정보를 가지고 addReservationThird.jsp로 forward
 		}else{
 			
 			MainSite resultMainSite = campSearchService.getMainSite(campReservation);
@@ -158,6 +162,53 @@ public class CampGeneralController {
 						
 			return "forward:/view/camp/addReservationThird.jsp";
 		}
+	}
+	
+	//3단계까지 예약 진행 후 결제 페이지로 넘어가기전 결제 담당 조원의 요청으로 캠핑장예약 정보 및 결제 정보를 map에 담아 payment Controller로 forward
+	@RequestMapping(value = "addPayment", method = RequestMethod.POST)
+	public String addPayment(@RequestParam("mainSiteNo") int mainSiteNo,
+			@ModelAttribute("campReservation") CampReservation campReservation,
+			HttpSession httpSession, HttpServletRequest request, Model model){
+		
+		//로그인시 세션에 등록된 user 정보를 가져옴
+		User user = (User)httpSession.getAttribute("user");
+		
+		MainSite mainSite = new MainSite();
+		mainSite.setMainSiteNo(mainSiteNo);
+		campReservation.setMainSite(mainSite);
+		
+		if(user == null) {
+			
+			return "redirect:/";
+		
+		//결제 담당조원의 요청 사항 : 예약등록번호 필요, 결제 정보 필요
+		//예약 테이블에 임시등록 컬럼을 추가 해 예약 결제전 임시로 테이블에 insert 후 auto increment된 예약등록번호 획득
+		//임시등록시 주요시설에도 예약 선점 상태로 등록됨 마이페이지에서 결제대기 확인 후 결제 가능
+		//임시등록 된 예약은 당일 결제가 완료 되지 않을 경우 삭제(실제 지우진 않고 delete flag처리)하고 주요시설 예약선점 지우는 스케줄러 작동
+		//원하는 결제 정보를 담은 Payment 생성 후 map에 담아서 Payment Controller로 forward 
+		} else {
+			
+			campReservation.setUser(user);
+			campReservationService.updateMainSiteTemp(campReservation);
+			campReservation = campReservationService.addTempReservation(campReservation);
+			campReservation.setUser(user);
+			
+			Payment payment = new Payment();
+			payment.setPaymentSender(campReservation.getUser().getId());
+			payment.setPaymentReceiver(campReservation.getCamp().getUser().getId());
+			payment.setPaymentCode("R1");
+			payment.setPaymentPriceTotal(campReservation.getTotalPaymentPrice());
+			
+			Map<String, Object> payCampMap = new HashMap<String, Object>();
+			payCampMap.put("payment", payment);
+			payCampMap.put("campReservation", campReservation);
+			
+			request.setAttribute("payCampMap", payCampMap);
+			
+			return "forward:/payment/readyPayment";
+			
+		}
+		
 	}
 	
 	@RequestMapping(value = "addPaymentByMyPage", method = RequestMethod.POST)
@@ -185,47 +236,7 @@ public class CampGeneralController {
 					
 		return "forward:/payment/readyPayment";
 	}
-	
-	@RequestMapping(value = "addPayment", method = RequestMethod.POST)
-	public String addPayment(@RequestParam("mainSiteNo") int mainSiteNo,
-								@ModelAttribute("campReservation") CampReservation campReservation,
-										HttpSession httpSession, HttpServletRequest request, Model model){
 		
-		User user = (User)httpSession.getAttribute("user");
-		
-		MainSite mainSite = new MainSite();
-		mainSite.setMainSiteNo(mainSiteNo);
-		campReservation.setMainSite(mainSite);
-		
-		if(user == null) {
-			
-			return "redirect:/main.jsp";
-			
-		} else {
-			
-			campReservation.setUser(user);
-			campReservationService.updateMainSiteTemp(campReservation);
-			campReservation = campReservationService.addTempReservation(campReservation);
-			campReservation.setUser(user);
-
-			Payment payment = new Payment();
-			payment.setPaymentSender(campReservation.getUser().getId());
-			payment.setPaymentReceiver(campReservation.getCamp().getUser().getId());
-			payment.setPaymentCode("R1");
-			payment.setPaymentPriceTotal(campReservation.getTotalPaymentPrice());
-						
-			Map<String, Object> payCampMap = new HashMap<String, Object>();
-			payCampMap.put("payment", payment);
-			payCampMap.put("campReservation", campReservation);
-			
-			request.setAttribute("payCampMap", payCampMap);
-			
-			return "forward:/payment/readyPayment";
-		
-		}
-		
-	}
-	
 	@RequestMapping(value = "listMyReservation" )
 	public String listMyReservation(@ModelAttribute("search") Search search, Model model ,HttpSession httpSession) throws Exception{
 		System.out.println("/campGeneral/listMyReservation : GET / POST");

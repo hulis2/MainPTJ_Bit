@@ -82,10 +82,6 @@ pageEncoding="UTF-8"%>
                     
                       </div>
                      
-                      <div class="row" id="info" style="text-align: center;">
-                          <span>예약일을 선택 하면 예약 가능한 주요시설이 나옵니다.</span>
-                      </div>
-
                       <div class="form-group" id="possible_mainsite" style="padding-top: 50px;">
                         <div class="row" style="text-align: center;">
                           <div class="col-sm-12 mb-sm-20" style="height: 700px;">
