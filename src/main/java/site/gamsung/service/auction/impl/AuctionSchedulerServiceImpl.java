@@ -19,7 +19,7 @@ import site.gamsung.service.auction.AuctionSchedulerService;
 import site.gamsung.service.common.Search;
 import site.gamsung.service.domain.AuctionInfo;
 import site.gamsung.service.domain.AuctionProduct;
-import site.gamsung.util.user.SendMail;
+import site.gamsung.util.user.SendMailHtml;
 
 @Service("auctionSchedulerService")
 public class AuctionSchedulerServiceImpl implements AuctionSchedulerService {
@@ -34,7 +34,7 @@ public class AuctionSchedulerServiceImpl implements AuctionSchedulerService {
 	
 	@Autowired
 	@Qualifier("sendMail")
-	private SendMail sendMail;
+	private SendMailHtml sendMail;
 	
 	@Value("#{auctionProperties['url']}")
 	private String url;
