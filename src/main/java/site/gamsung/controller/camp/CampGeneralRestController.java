@@ -33,6 +33,11 @@ import site.gamsung.service.domain.MainSite;
 import site.gamsung.service.domain.RatingReview;
 import site.gamsung.service.domain.User;
 
+/*
+캠핑장 관련 일반회원(비회원)이 접근 할수 있는 Service를 
+비동기 방식으로 화면전환 없이 data만 주고 받기 위한 RestCtrl
+작성자 : 박철홍
+*/
 @RestController
 @RequestMapping("/campGeneral/*")
 public class CampGeneralRestController {
@@ -86,11 +91,13 @@ public class CampGeneralRestController {
 		return "/view/camp/listRatingReview.jsp";
 	}
 	
+	//예약 시작일자, 종료일자, 캠핑장 등록번호를 GET방식으로 받아 선택한 예약일자에 가능한 주요시설 목록을 data만 전송해줌
 	@RequestMapping( value="json/possibleMainsite/{start}/{end}/{campNo}", method=RequestMethod.GET)
-	public  List<MainSite> possibleMainsite (@PathVariable Date start, @PathVariable Date end, @PathVariable int campNo){
+	public List<MainSite> possibleMainsite (@PathVariable Date start, @PathVariable Date end, @PathVariable int campNo){
 		
 		System.out.println("/campGeneral/json/possibleMainsite : GET");
 		
+		//예약가능 주요시설 목록을 찾는 서비스 로직을 수행하기 위해 예약 시작일, 종료일, 캠핑장 등록번호를 map에 담음 
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		map.put("startDate", start);

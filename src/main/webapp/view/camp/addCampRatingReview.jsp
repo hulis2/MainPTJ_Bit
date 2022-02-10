@@ -125,13 +125,13 @@ pageEncoding="UTF-8"%>
                                <div class="col-xs-8">
                                     <div class="form-group">
                                          <div class="col-xs-1" style="text-align: end;">평점</div>
-                                         <div class="starRev col-xs-3" style="text-align: start; top: 3px; padding-left: 0px;">
+                                         <div class="starRev col-xs-3" style="text-align: start; padding-left: 0px; margin-top: 7px;">
                                               <span class="starR on" data-star=1.0>별1</span>
                                               <span class="starR"    data-star=2.0>별2</span>
                                               <span class="starR"    data-star=3.0>별3</span>
                                               <span class="starR"    data-star=4.0>별4</span>
                                               <span class="starR"    data-star=5.0>별5</span>
-                                              <span id="result_star" style="text-align: center;"></span>
+                                              <a id="result_star" style="text-align: center;"></a>
                                          </div>
                                     </div>
                                     <div class="form-group" style="text-align: start; margin-bottom: 0px;">
