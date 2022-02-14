@@ -39,8 +39,8 @@
   <img src="https://img.shields.io/badge/jQuery-3.5.1-0769AD?style=flat&logo=jQuery&logoColor=white"/></a>&nbsp;
   <img src="https://img.shields.io/badge/BootStrap-4.6-7952B3?style=flat&logo=BootStrap&logoColor=white"/></a>&nbsp;
 ### OPEN API 
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/Kakao Map-E34F26?style=flat&logo=html5&logoColor=white"/></a>&nbsp;
-  <img src="https://img.shields.io/badge/CoolSMS-E34F26?style=flat&logo=html5&logoColor=white"/></a>&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/Kakao Map-F7DF1E?style=flat&logo=kakao&logoColor=white"/></a>&nbsp;
+  <img src="https://img.shields.io/badge/CoolSMS-0769AD?style=flat&logoColor=white"/></a>&nbsp;
 ### IDE
 - Back-end  
   <img src="https://img.shields.io/badge/Eclipse-0769AD?style=flat&logo=eclipse&logoColor=white"/></a>&nbsp; 
