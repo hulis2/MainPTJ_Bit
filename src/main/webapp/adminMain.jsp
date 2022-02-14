@@ -125,7 +125,7 @@ pageEncoding="UTF-8"%>
 												<div class="summary">
 													<h4 class="title">사이트수익</h4>
 													<div class="info">
-														<strong class="amount">${siteProfitStatistics.profitAllPayment} ₩</strong>
+														<strong class="amount">9,600 ₩</strong>
 													</div>
 												</div>
 												<div class="summary-footer">

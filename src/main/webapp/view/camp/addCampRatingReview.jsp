@@ -120,7 +120,7 @@ pageEncoding="UTF-8"%>
                           </div>
                       </div>
 
-                      <div class="row">
+                            <div class="row">
                                <div class="col-xs-2"></div>
                                <div class="col-xs-8">
                                     <div class="form-group">
@@ -155,13 +155,14 @@ pageEncoding="UTF-8"%>
 
                                     <div class="form-group" style="text-align: start;">
                                           <div>
-                                              <div id="review_comment_cnt">(0 / 1000)</div>
+                                              <div id="review_comment_cnt" style="padding-left: 20px;">(0 / 1000)</div>
                                           </div>
                                     </div>
                                     
                                     <div class="form-group">
                                           <div class="col-xs-2" style="text-align: start;">
-                                              <button type="button" style="padding-left: 20px; padding-right: 20px;" id="report-btn" data-userid = "${user.id}" class="btn btn-danger" data-reporttype = "1" data-receivername = "${camp.user.campName}" >신고</button>
+                                              <button type="button" style="padding-left: 20px; padding-right: 20px;" id="report-btn" data-userid = "${user.id}" class="btn btn-danger" 
+                                                      data-reporttype = "1" data-receivername = "${camp.user.campName}" >신고</button>
                                           </div>
 
                                           <div class="col-xs-8" style="text-align: start; top: 3px; padding-left: 0px;">
@@ -176,10 +177,11 @@ pageEncoding="UTF-8"%>
                                 </div>
                                 <div class="col-xs-2"></div>
                             </div>
-                         </div>
-                       <div class="col-xs-2"></div>   
-                    </div>
+                        
                 </div>
+                  <div class="col-xs-2"></div>   
+            </div>
+          </div>
                 
                 <input type="hidden" id="statusRating" name="statusRating" value=1.0>
                 <input type="hidden" id="camp_no" name="camp.campNo" value="${camp.campNo}">
@@ -187,11 +189,11 @@ pageEncoding="UTF-8"%>
               </form>
                 </div>
 
-              </div>
-          </div>
-        </section>
+        </div>
+      </div>
+    </section>
 
-    </div>
+  </div>
    
   </main>  
     
@@ -218,7 +220,7 @@ pageEncoding="UTF-8"%>
             });
         });
 
-              // 파일 현재 필드 숫자 totalCount랑 비교값
+        // 파일 현재 필드 숫자 totalCount랑 비교값
         var fileCount = 0;
         // 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
         var totalCount = 3;

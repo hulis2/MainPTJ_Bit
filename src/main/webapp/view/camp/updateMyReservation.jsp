@@ -472,7 +472,7 @@ pageEncoding="UTF-8"%>
                         if(addpaymentPrice < 0){
                           var append_btn = "<button type='button' class='btn btn-danger' onclick='reservationcancle()'>예약취소</button>";
                             }else if(addpaymentPrice == 0){
-                              var append_btn = "<button type='button' class='btn btn-primary' onclick='reservationupdate()'>확인</button>";
+                              var append_btn = "<button type='button' class='btn btn-info' onclick='reservationupdate()'>확인</button>";
                             }else if(addpaymentPrice > 0){
                               var append_btn = "<button type='button' class='btn btn-success' onclick='reservationupdate()'>결제하기</button>";
                             }
@@ -561,7 +561,7 @@ pageEncoding="UTF-8"%>
                   if(addpaymentPrice < 0){
                           var append_btn = "<button type='button' class='btn btn-danger' onclick='reservationcancle()'>예약취소</button>";
                     }else if(addpaymentPrice == 0){
-                          var append_btn = "<button type='button' class='btn btn-primary' onclick='reservationupdate()'>확인</button>";
+                          var append_btn = "<button type='button' class='btn btn-info' onclick='reservationupdate()'>확인</button>";
                     }else if(addpaymentPrice > 0){
                           var append_btn = "<button type='button' class='btn btn-success' onclick='reservationupdate()'>결제하기</button>";
                     }

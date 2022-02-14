@@ -201,32 +201,7 @@
 				AND r.reservation_reg_date LIKE CONCAT('%',#{search.searchKeyword},'%')
 			</if>
 		</if>
-		<trim prefix="ORDER BY">
-			<if test="search.sortCondition == null">
-				r.reservation_reg_date DESC
-			</if>
-			<if test="search.sortCondition != null ">
-               <if test='search.sortCondition.equals("이용가격 높은순")'>
-                  r.total_payment_price DESC
-               </if>
-               <if test='search.sortCondition.equals("이용가격 낮은순")'>
-                  r.total_payment_price ASC
-               </if>
-               <if test='search.sortCondition.equals("이용 가능순")'>
-                  r.reservation_status ASC
-               </if>
-               <if test='search.sortCondition.equals("이용 불가능순")'>
-                  r.reservation_status DESC
-               </if>
-               <if test='search.sortCondition.equals("예약일자 최근순")'>
-                  r.reservation_reg_date DESC
-               </if>
-               <if test='search.sortCondition.equals("예약일자 오래된순")'>
-                  r.reservation_reg_date ASC
-               </if>
-            </if>
-         </trim>
-         LIMIT #{search.pageSize} OFFSET #{search.offset}
+		LIMIT #{search.pageSize} OFFSET #{search.offset}
 		 
 	</select>
 	
@@ -234,7 +209,7 @@
 		SELECT COUNT(*)
 	  	FROM(SELECT DISTINCT r.reservation_no
 			 FROM CAMP_RESERVATION r, MAINSITE m, CAMP c, USERS u
-			 WHERE c.user_id = u.user_id AND c.camp_no = r.camp_no AND r.mainsite_no = m.mainsite_no
+			 WHERE c.user_id = u.user_id AND c.camp_no = r.camp_no AND r.mainsite_no = m.mainsite_no AND r.delete_flag = 'N'
 			 <if test="id != null">
 				AND r.user_id = #{id}
 			 </if>

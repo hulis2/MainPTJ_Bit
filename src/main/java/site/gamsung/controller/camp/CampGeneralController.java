@@ -466,14 +466,17 @@ public class CampGeneralController {
 		return "forward:/view/camp/addCampRatingReview.jsp";
 	}
 	
+	//리뷰 정보를 POST방식으로 받아 DB에 등록 이후 예약 상태는 리뷰 등록 완료로 전환 하고 나의 리뷰 목록으로 redirect
 	@RequestMapping(value = "addCampRatingReview", method = RequestMethod.POST)
 	public String addCampRatingReview(@ModelAttribute("RatingReview") RatingReview ratingReview, @RequestParam("article_file") MultipartFile[] reviewImg, 
 											@RequestParam("reservationNo") String reservationNo, Model model ,HttpSession httpSession){
 		
 		System.out.println("/campGeneral/addCampRatingReview : POST");
 		
+		//MultipartFile Upload시 원하는 column에 insert하기 위한 index(최대 3장까지 가능)
 		int	index = 1;
 		
+		//MultipartFile[]로 받은 reviewImg를 하나 하나 뽑아 랜덤한 이름으로 바꾸고 원하는 file 경로와 column에 insert하기 위한 반복문
 		for(MultipartFile multpartfile: reviewImg) {
 				
 		//MultipartFile로 받은 reviewImg에서 file이름을 originalReviewImg 넣는다. 
@@ -513,15 +516,18 @@ public class CampGeneralController {
 			}
 		}
 		
+		//Session에서 유저 정보 가져와 입력
 		User user = (User)httpSession.getAttribute("user");
 		ratingReview.setUser(user);
 		
+		//리뷰 평점이 커뮤니티 게시판에서 등록한 것인지 이용 완료 후기 인지 판단하기 위한 리뷰 상태값
 		if(ratingReview.getRatingReviewStatus() == 2) {
 			ratingReview.setRatingReviewStatus(2);	
 		}else {
 		ratingReview.setRatingReviewStatus(1);
 		}
 		
+		//리뷰가 등록 되면 예약상태는 이용완료에서 리뷰등록완료로 전환됨을 확인하기위한 예약상태 업데이트(이용금액은 update 시 append 되기 때문에 초기화함)
 		CampReservation campReservation = campReservationService.getReservation(reservationNo);
 		campReservation.setReservationStatus(7);
 		campReservation.setTotalPaymentPrice(0);
@@ -529,7 +535,7 @@ public class CampGeneralController {
 		ratingReviewService.addRatingReview(ratingReview);
 		campReservationService.updateReservationStatus(campReservation);
 		
-		return "forward:/view/camp/listMyRatingReview.jsp";
+		return "redirect:/view/camp/listMyRatingReview.jsp";
 	}
 	
 	@RequestMapping(value = "listMyCampRatingReview")
